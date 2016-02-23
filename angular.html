@@ -89,6 +89,14 @@
 			{{ x1.Name + ', ' + x1.Country }}
 		  </li>
 		</ul>
+		
+		<table>
+		  <tr ng-repeat="x in myWelcome">
+			<td>{{ $index + 1 }}</td>
+			<td>{{ x.Name }}</td>
+			<td>{{ x.Country }}</td>
+		  </tr>
+		</table>
 				
 		<p>The hexadecimal value of 255 is:</p>
 
@@ -97,7 +105,33 @@
 		Convert the number 255, using a custom made service inside a custom made filter:
 
 		<h1>{{255 | myFormat}}</h1>
-
+		
+		<select ng-model="selectedName" ng-options="y.Name for (x,y) in myWelcome"></select>
+		<select ng-model="selectedCountry" ng-options="x.Country for x in myWelcome"></select>
+		<h3>Slected Name: {{selectedName.Name}} + '--'+ {{selectedName.Country}}</h3>
+		<select ng-model="selectedCar">
+			<option ng-repeat="x in myWelcome" value="{{x.Country}}">{{x.Name}}</option>
+		</select>
+		<h2>You selected: {{selectedCar}}</h2>
+		
+		
+		<div ng-init="mySwitch=true">
+			<p>
+				<button ng-disabled="mySwitch">Click Me!</button>
+			</p>
+			<p>
+				<input type="checkbox" ng-model="mySwitch"/>Button
+			</p>
+			<p>
+				{{ mySwitch }}
+			</p>
+		</div> 
+		
+		<div>
+			<p ng-show="true">I am visible</p>
+			<p ng-show="false">I am Invisible</p>
+		</div>
+		
 	</div>
 	<script>
 		var app = angular.module('myApp', []);
@@ -157,6 +191,17 @@
 	<style>
 		input.ng-invalid{
 			background-color: red;
+		}
+		table, th , td  {
+		  border: 1px solid grey;
+		  border-collapse: collapse;
+		  padding: 5px;
+		}
+		table tr:nth-child(odd)	{
+		  background-color: #f1f1f1;
+		}
+		table tr:nth-child(even) {
+		  background-color: #ffffff;
 		}
 	</style>	
 	</body>
